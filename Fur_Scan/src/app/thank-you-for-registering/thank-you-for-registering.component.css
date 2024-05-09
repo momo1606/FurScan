@@ -1,0 +1,98 @@
+.header {
+    padding: 0% 5% 0% 0%;
+    background-color: #c1c1c1;
+    top: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.header-project-logo {
+    width: 7%;
+    border-radius: 50%;
+    margin: 1%;
+}
+
+.header-project-heading {
+    box-sizing: border-box;
+    /* font-family: fantasy; */
+    font-size: 50px;
+    color: #8f2726;
+}
+
+.header-button {
+    width: 35%;
+    margin-left: 2%;
+    font-weight: 550;
+}
+
+.header-hamburger {
+    width: 7%;
+}
+
+.vertical-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10%;
+
+}
+
+/* Style each button individually if needed */
+.vertical-list button {
+    margin-bottom: 5px;
+    /* Add spacing between the buttons */
+}
+
+.expandedButton {
+    width: 96%;
+    margin-left: 2%
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .header-project-heading {
+        font-size: 40px;
+        /* Adjust the font size for smaller screens */
+    }
+}
+
+/* Media Query for even smaller screens */
+@media (max-width: 480px) {
+    .header-project-heading {
+        font-size: 30px;
+        /* Adjust the font size for even smaller screens */
+    }
+}
+
+.thankYouSection{
+    background: #8c98a3;
+    padding: 5%;
+}
+
+.footer {
+    background-color: black;
+    color: white;
+    padding: 7%;
+    height: 14vh;
+    margin-top: auto;
+    text-align: center;
+    position: relative;
+}
+
+.lead{
+    font-weight: 500;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.footer {
+    background-color: black;
+    color: white;
+    padding: 2%;
+    text-align: center;
+}

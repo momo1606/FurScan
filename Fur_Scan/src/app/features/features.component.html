@@ -1,0 +1,104 @@
+<mat-toolbar class="header">
+  <img class="header-project-logo" [src]='projectLogo' alt="">
+  <span class="header-project-heading">FurScan</span>
+  <span class="example-spacer"></span>
+  <div *ngIf='hamburger==false'>
+    <button type="button" class="btn header-button" (click)="Home()">Home</button>
+    <button type="button" class="btn header-button" (click)="ContactUs()">Contact</button>
+    <button type="button" class="btn btn-dark header-button" (click)="LoginPage()">Sign In</button>
+  </div>
+  <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger" [src]="expandedList ? cross : hamburger_menu"
+       [@imageChange]="imageChangeTrigger ? 'true' : 'false'" [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+</mat-toolbar>
+<div *ngIf="expandedList==true" class="vertical-list">
+  <button type="button" class="btn btn-dark expandedButton" (click)="Home()">Home</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="ContactUs()">Contact</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="LoginPage()">Sign In</button>
+</div>
+
+<div class="px-4 py-5 my-5 text-center heroSection border-bottom">
+  <h1 class="display-5 fw-bold text-body-emphasis hero-section-header">FurScan Features!</h1>
+  <div class="col-lg mx-auto">
+    <p class="lead mb-2 hero-section-description">
+      Discover the powerful capabilities that Furscan brings to the world of canine dermatology. Our carefully curated set of features is designed to streamline the process of identifying and addressing skin issues in your furry companions. From cutting-edge AI analysis to expert vet verification, Furscan is your trusted partner in ensuring the well-being of your beloved dogs. Explore the key features below:
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            AI-Powered Diagnosis  🤖
+          </div>
+          <div class="card-body">
+            Leverage advanced artificial intelligence to swiftly identify a wide range of skin conditions, providing you with initial insights within minutes.
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Vet Verification 🐕
+          </div>
+          <div class="card-body">
+            Rest easy knowing that our team of experienced veterinarians meticulously review every diagnosis, ensuring accuracy and reliability.
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Detailed Reports 📋
+          </div>
+          <div class="card-body">
+            Receive comprehensive reports that not only outline the identified issue but also offer potential causes and recommended next steps for your dog's skin health.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Secure User Accounts 🔒
+          </div>
+          <div class="card-body">
+            Create personalized accounts to keep track of your furry companions' cases, ensuring a seamless and tailored experience.
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Multi-Pet Support 🐶
+          </div>
+          <div class="card-body">
+            Extend the platform to cater to owners who have multiple dogs, allowing them to manage and track the health of each pet.
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Case History Management 📁
+          </div>
+          <div class="card-body">
+            Allow users to easily access and manage the history of their dog's skin condition cases, including previous diagnoses, treatments, and progress.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-width-container-footer">
+  <footer class="py-3 my-4 footer">
+    <p class="text-center text-muted footer-copyright">© 2023 Copyright FurScan. All rights reserved.</p>
+  </footer>
+</div>
+
+

@@ -1,0 +1,90 @@
+<mat-toolbar class="header">
+  <img class="header-project-logo" [src]='projectLogo' alt="">
+  <span class="header-project-heading">FurScan</span>
+
+  <span class="example-spacer"></span>
+
+  <div *ngIf='hamburger==false'>
+    <button type="button" class="btn header-button" (click)="HomePage()">Home</button>
+    <button type="button" class="btn header-button" (click)="ContactUs()">Contact</button>
+    <button type="button" class="btn btn-dark header-button" (click)="LoginPage()">Sign In</button>
+  </div>
+  <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger" [src]="expandedList ? cross : hamburger_menu"
+       [@imageChange]="imageChangeTrigger ? 'true' : 'false'" [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+
+</mat-toolbar>
+
+<div *ngIf="expandedList==true" class="vertical-list">
+  <button type="button" class="btn btn-dark expandedButton" (click)="HomePage()">Home</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="ContactUs()">Contact</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="LoginPage()">Sign In</button>
+</div>
+
+<div class="px-4 py-5 my-5 text-center about-section about-section-bg2">
+  <h1 class="display-5 fw-bold text-body-emphasis about-section-header">About Us</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 about-section-description">
+      Welcome to Furscan!
+      We understand the deep bond between you and your four-legged companion, and we're dedicated to ensuring their health
+      and happiness.
+    </p>
+
+    <p class="lead mb-4 about-section-description">
+      Our platform serves as a bridge between devoted dog owners and experienced veterinarians,
+      focusing specifically on canine skin health.
+      With Furscan, you have the power to take control of your furry friend's dermatological concerns like never before.
+    </p>
+
+    <p class="lead mb-4 about-section-description">
+      How does it work? It's simple. Upload a photo of your dog's skin issue, and our advanced AI swiftly identifies the
+      problem, generating a detailed report. But that's not where our journey ends. This report is then carefully reviewed
+      by a qualified veterinarian.
+    </p>
+
+    <p class="lead mb-4 about-section-description">
+      We believe that every dog deserves the best care possible, and we're here to make that a reality.
+      Let's embark on a journey towards a happier, healthier life for your beloved pet.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-5 my-5 text-center about-section about-section-bg1">
+  <h1 class="display-5 fw-bold text-body-emphasis about-section-subheader">Our Mission</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 about-section-description">
+      Empowering dog owners with knowledge and connecting them with expert veterinarians for accurate diagnosis and
+      compassionate care of their furry companions' skin issues.
+    </p>
+    <p class="lead mb-4 about-section-description">
+      To create a global community where every dog receives timely and accurate skin health assessments,
+      leading to happier, healthier lives.
+    </p>
+    <p class="lead mb-4 about-section-description">
+      Furscan combines cutting-edge AI technology with the expertise of trusted veterinarians,
+      revolutionizing the way we understand and address dog skin diseases.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-5 my-5 text-center about-section about-section-bg2 border-bottom">
+  <h1 class="display-5 fw-bold text-body-emphasis about-section-subheader">Testimonials</h1>
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let item of carouselItems; let i = index"
+           [ngClass]="{'active': i === currentIndex}">
+        <div class="carousel-content">
+          <img class="carousel-images" [src]='item.image' alt="Slide {{i + 1}}">
+          <p class="carousel-text">{{item.text}}</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control prev" (click)="prevSlide()">&lt;</button>
+    <button class="carousel-control next" (click)="nextSlide()">&gt;</button>
+  </div>
+</div>
+
+<div class="full-width-container-footer">
+  <footer class="py-3 my-4 footer">
+    <p class="text-center text-muted footer-copyright">© 2023 Copyright FurScan. All rights reserved.</p>
+  </footer>
+</div>

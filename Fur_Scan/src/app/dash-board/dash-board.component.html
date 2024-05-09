@@ -1,0 +1,123 @@
+<div class="container">
+    <mat-toolbar class="header" style="display: flex;">
+        <img class="header-project-logo" [src]='projectLogo' alt="" routerLink=''>
+        <span class="header-project-heading" style=" margin-top: 2%;">FurScan</span>
+        <span class="example-spacer"></span>
+        <div *ngIf='hamburger==false' style="display: flex; margin-top: 2%; height: 10%;">
+            <button type="button" class="btn header-button" routerLink='/account'>Account</button>
+            <button type="button" class="btn btn-dark header-button" (click)="logout()">Logout</button>
+        </div>
+        <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger"
+            [src]="expandedList ? cross : hamburger_menu" [@imageChange]="imageChangeTrigger ? 'true' : 'false'"
+            [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+    </mat-toolbar>
+    <div *ngIf="expandedList==true" class="vertical-list">
+        <button type="button" class="btn btn-dark expandedButton" routerLink='/account'>Account</button>
+        <button type="button" class="btn btn-dark expandedButton" (click)="logout()">Logout</button>
+    </div>
+
+    <div class="userInfo">
+        <h1 class="welcomeMessage" style="max-width: 50%; word-wrap: break-word;">Welcome {{userFirstName}}</h1>
+        <span class="example-spacer"></span>
+        <button style="height: fit-content;" type="button" class="btn btn-dark upload-button" (click)="routingToPetDetails()">+Upload</button>
+
+    </div>
+
+    <h1 style="margin:19%" *ngIf="!tableShow">No Pet Entry added. Kindly click on Upload button to add pet details</h1>
+
+    <div *ngIf="tableShow" class="container mt-5">
+        <div class="search-tab">
+            <input type="text" class="form-control search-input" placeholder="Search by Pet Name"
+                [(ngModel)]="searchName">
+            <!-- <div class="table-container">
+                <table class="data-table">
+                    <thead class="thead-dark">
+                        <tr class="table-heading">
+                            <th>Record Id</th>
+                            <th>Dog Name</th>
+                            <th>Dog Breed</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="scrollable-tbody">
+                        <tr *ngFor="let pet of paginatedPetData | filterByPetName:searchName">
+                            <td>{{pet.pet_report_id}}</td>
+                            <td>{{pet.pet_name}}</td>
+                            <td>{{pet.breed}}</td>
+                            <td>{{ getStatusMessage(pet.remarks) }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" (click)="openDetailsPage(pet)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+
+            <table class="table align-middle mb-0" style="width: 97%; margin: 5% 0%;">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Record Id</th>
+                        <th>Dog Name</th>
+                        <th>Dog Breed</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pet of paginatedPetData | filterByPetName:searchName">
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ pet.image_text }}" alt=""
+                                    style="width: 45px; height: 45px" class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{pet.pet_report_id}}</p>
+                                    <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{pet.pet_name}}</p>
+                            <!-- <p class="text-muted mb-0">IT department</p> -->
+                        </td>
+                        <td>
+                            <span>{{pet.breed}}</span>
+                        </td>
+                        <!-- <td>{{ getStatusMessage(pet.remarks) }}</td> -->
+                        <td [ngClass]="{'not-reviewed': pet.remarks === null, 'reviewed': pet.remarks !== null}">
+                            {{ pet.remarks === null ? 'Not reviewed' : 'Reviewed' }}
+                        </td>
+
+                        <td>
+                            <button class="btn btn-dark btn-sm" (click)="openDetailsPage(pet)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination-controls">
+                <button class="btn btn-sm btn-dark" (click)="prevPage()"
+                    [disabled]="currentPage === 1">Previous</button>
+                <span style="font-weight: 600; margin-left: 2%; margin-right: 2%;">Page {{ currentPage }} of {{
+                    totalPages }}</span>
+                <button class="btn btn-sm btn-dark" (click)="nextPage()"
+                    [disabled]="currentPage === totalPages">Next</button>
+            </div>
+            <h3 style="font-weight: 600;
+            margin-right: 2%;
+            margin-left: 2%;" class="pagination-controls">Showing maximum 5 entries per page</h3>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>Copyright © 2023 FurScan. All rights reserved.</p>
+</div>

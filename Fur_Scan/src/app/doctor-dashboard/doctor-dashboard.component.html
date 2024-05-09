@@ -1,0 +1,137 @@
+<div class="container">
+    <mat-toolbar class="header" style="display: flex;">
+        <img class="header-project-logo" [src]='projectLogo' alt="" routerLink=''>
+        <span class="header-project-heading" style=" margin-top: 2%;">FurScan</span>
+        <span class="example-spacer"></span>
+        <div *ngIf='hamburger==false' style="display: flex; margin-top: 2%; height: 10%;">
+            <button type="button" class="btn header-button" routerLink='/account'>Account</button>
+            <button type="button" class="btn btn-dark header-button" (click)="logout()">Logout</button>
+        </div>
+        <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger"
+            [src]="expandedList ? cross : hamburger_menu" [@imageChange]="imageChangeTrigger ? 'true' : 'false'"
+            [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+    </mat-toolbar>
+    <div *ngIf="expandedList==true" class="vertical-list">
+        <button type="button" class="btn btn-dark expandedButton" routerLink='/account'>Account</button>
+        <button type="button" class="btn btn-dark expandedButton" (click)="logout()">Logout</button>
+    </div>
+
+
+    <div class="userInfo">
+        <h1 class="welcomeMessage">Welcome Doctor</h1>
+        <span class="example-spacer"></span>
+
+        <!-- <div class="mb-2">
+            <button style="margin-right: 2%;" (click)="toggleEdit()" class="btn btn-secondary mb-2">Edit</button>
+            <h2 style="font-weight: bold; display: inline-block;     margin-right: 1%;">
+                {{ clinicName }}
+                <span *ngIf="isEditing">
+                    <input [(ngModel)]="editedClinicName" class="form-control" />
+                </span>
+            </h2>
+            <h2 style="font-weight: bold; display: inline-block;">
+                {{ clinicLocation }}
+                <span *ngIf="isEditing">
+                    <input [(ngModel)]="editedClinicLocation" class="form-control" />
+                </span>
+            </h2>
+            <button *ngIf="isEditing" (click)="saveChanges()" class="btn btn-primary">Save</button>
+        </div> -->
+
+        <div style="width: 30%;">
+            <div>
+                <h2 style="font-weight: bold; display: inline-block; margin-right: 1%;">
+                    Clinic Name - {{ clinicName }}
+                    <span *ngIf="isEditing">
+                        <input [(ngModel)]="editedClinicName" class="form-control" />
+                    </span>
+                </h2>
+
+                <h2 style="font-weight: bold; display: inline-block;">
+                    Clinic Location - {{ clinicLocation }}
+                    <span *ngIf="isEditing">
+                        <input [(ngModel)]="editedClinicLocation" class="form-control" />
+                    </span>
+                </h2>
+            </div>
+            <div style="word-wrap: break-word;">
+            <button style="margin-right: 2%; width: 20%;" (click)="toggleEdit()" class="btn btn-secondary mb-2">Edit</button>
+            <button style="width: 22%;" *ngIf="isEditing" (click)="saveChanges()" class="btn btn-primary">Save</button>
+        </div>
+        </div>
+
+
+    </div>
+
+    <div class="container mt-5">
+        <div class="search-tab">
+            <input type="text" class="form-control search-input" placeholder="Search by Pet Name"
+                [(ngModel)]="searchName">
+            <div class="table-container">
+                <table class="table align-middle mb-0" style="width: 97%; margin: 5% 0%;">
+                    <thead  class="bg-light">
+                        <tr class="table-heading">
+                            <th>Record Id</th>
+                            <th>Dog Name</th>
+                            <th>Dog Breed</th>
+                            <th>Dog Age</th>
+                            <th>Report</th>
+                            <th>Status</th>
+                            <th>Add Note</th>
+                        </tr>
+                    </thead>
+                    <tbody class="scrollable-tbody">
+                        <tr *ngFor="let pet of paginatedPetData | filterByPetName:searchName" style="font-weight: 500;">
+                            <td>{{ pet.pet_report_id }}</td>
+                            <td>{{ pet.pet_name }}</td>
+                            <td>{{ pet.breed }}</td>
+                            <td>{{ pet.age }}</td>
+
+                            <td><a style="color: black; font-weight: 500;" *ngIf="pet.report_text !== 'https://furscan.s3.amazonaws.com/null'"
+                                    [href]="pet.report_text" [download]="'pet_report_' + pet.pet_report_id + '.pdf'">
+                                    <i class="fas fa-file-pdf"></i> View Report                                </a>
+                            </td>
+                            <td [ngClass]="{'not-reviewed': pet.remarks === null, 'reviewed': pet.remarks !== null}">
+                                {{ pet.remarks === null ? 'Not reviewed' : 'Reviewed' }}
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" (click)="expandDetails(pet)">
+                                        <i class="fas fa-pen-square" style="color: black;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div *ngIf="expandedPet">
+                    <div class="custom-modal">
+                        <div class="modal-content" style="height: 42%;">
+                            <h2>Details for {{ expandedPet.pet_name }}</h2>
+                            <textarea style="margin: 2% 0%; height: 70%;" [(ngModel)]="expandedPet.remarks" placeholder="Add your remarks..."></textarea>
+                            <div class="modal-footer">
+                            <button class="btn btn-dark" (click)="sendRemarks()" style="margin-right: 1%;">Send</button>
+                            <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="pagination-controls">
+                <button class="btn btn-sm btn-dark" (click)="prevPage()"
+                    [disabled]="currentPage === 1">Previous</button>
+                <span style="font-weight: 600; margin-left: 2%; margin-right: 2%;">Page {{ currentPage }} of {{
+                    totalPages }}</span>
+                <button class="btn btn-sm btn-dark" (click)="nextPage()"
+                    [disabled]="currentPage === totalPages">Next</button>
+            </div>
+            <h3 style="font-weight: 600; margin-right: 2%; margin-left: 2%;" class="pagination-controls">Showing maximum 5
+                entries per page
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Copyright © 2023 FurScan. All rights reserved.</p>
+</div>

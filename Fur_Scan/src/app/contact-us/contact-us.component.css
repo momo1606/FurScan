@@ -1,0 +1,180 @@
+body {
+  background-color: rgb(113, 73, 24);
+}
+
+.header {
+  padding: 0% 5% 0% 0%;
+  background-color: #c1c1c1;
+  top: 0;
+  width: 100%;
+  height: fit-content;
+}
+
+.header-project-logo {
+  width: 7%;
+  border-radius: 50%;
+  margin: 1%;
+}
+
+.header-project-heading {
+  box-sizing: border-box;
+  /* font-family: fantasy; */
+  font-size: 50px;
+  color: #8f2726;
+}
+
+.header-button {
+  width: 35%;
+  margin-left: 2%;
+  font-weight: 550;
+}
+
+.header-hamburger {
+  width: 7%;
+}
+
+.vertical-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10%;
+
+}
+
+/* Style each button individually if needed */
+.vertical-list button {
+  margin-bottom: 5px;
+  /* Add spacing between the buttons */
+}
+
+.expandedButton {
+  width: 96%;
+  margin-left: 2%
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .header-project-heading {
+    font-size: 40px;
+    /* Adjust the font size for smaller screens */
+  }
+}
+
+/* Media Query for even smaller screens */
+@media (max-width: 480px) {
+  .header-project-heading {
+    font-size: 30px;
+    /* Adjust the font size for even smaller screens */
+  }
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.heroSection {
+  /*background: #c1c1c1;*/
+
+  margin: 0% !important;
+}
+
+.hero-section-header {
+  font-size: 2.3rem;
+  line-height: normal;
+}
+
+.contact-section-header{
+  font-size: 1.5rem;
+  line-height: normal;
+}
+
+.container {
+  padding: 0;
+  background: #8c98a3;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 20px;
+  background: #8c98a3;
+  padding: 0 70px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+ul li a{
+  color: #fff;
+  text-decoration: underline;
+}
+
+p a{
+  color: #fff;
+  text-decoration: underline;
+}
+
+
+.btn-dark {
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-dark:hover {
+  background-color: grey;
+}
+
+.btn-dark:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .container{
+    width: 100%;
+  }
+  .info{
+    margin-top: 20px;
+  }
+}
+
+.footer-copyright {
+  font-weight: 550;
+}
+
+.footer{
+  margin: 0% !important;
+}
+
+.full-width-container-footer {
+  width: 100% !important;
+  max-width: inherit;
+  margin: 0;
+  padding: 0;
+}

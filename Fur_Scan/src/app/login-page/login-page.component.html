@@ -1,0 +1,88 @@
+<div class="container">
+    <mat-toolbar class="header">
+        <img class="header-project-logo" [src]='projectLogo' alt="">
+        <span class="header-project-heading">FurScan</span>
+
+        <span class="example-spacer"></span>
+
+
+
+    </mat-toolbar>
+
+    <section>
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center sign-up">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                        class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+
+
+                    <form [formGroup]="loginForm">
+
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Enter a valid email address" formControlName="email" />
+                            <label class="form-label" for="form3Example3">Email address</label>
+                            <!-- Display error message in red if email is invalid -->
+                            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
+                                class="text-danger">
+                                Please enter a valid email.
+                            </div>
+
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <input type="password" id="form3Example4" class="form-control form-control-lg"
+                                placeholder="Enter password" formControlName="password" />
+                            <label class="form-label" for="form3Example4">Password</label>
+
+                            <!-- Display error message in red if password is less than 5 characters -->
+                            <div *ngIf="loginForm.get('password')?.hasError('minlength') && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
+                                class="text-danger">
+                                Password must be at least 8 characters long.
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Checkbox -->
+                           
+                            <a (click)="forgotPassword()" class="text-body">Forgot password?</a>
+                        </div>
+
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="button" class="btn btn-primary btn-lg login_Button" (click)="onSubmit()"
+                                [disabled]="loginForm.invalid">Login</button>
+                            <!-- Disable the button if the form is invalid -->
+
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+                                <button type="button" class="btn btn-dark regiter_button"
+                                    (click)="SignUpPage()">Register</button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="get-started">
+            <h2>Get Started Today</h2>
+            <p>🐶 New User? Sign up now to explore the world of Furscan and take the first step toward proactive pet
+                care.
+            </p>
+            <p>🔑 Already a Member? Log in to continue your journey in maintaining your dog's skin health.</p>
+            <p>Remember, a healthy dog is a happy dog. Let's work together to keep your furry friend smiling and
+                thriving.
+            </p>
+            <p><em>Furscan Team</em></p>
+        </div>
+    </section>
+</div>
+
+<div class="footer">
+    <p>Copyright © 2023 FurScan. All rights reserved.</p>
+</div>

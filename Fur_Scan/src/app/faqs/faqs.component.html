@@ -1,0 +1,117 @@
+<mat-toolbar class="header">
+  <img class="header-project-logo" [src]='projectLogo' alt="">
+  <span class="header-project-heading">FurScan</span>
+
+  <span class="example-spacer"></span>
+
+  <div *ngIf='hamburger==false'>
+    <button type="button" class="btn header-button" (click)="HomePage()">Home</button>
+    <button type="button" class="btn header-button" (click)="ContactUs()">Contact</button>
+    <button type="button" class="btn btn-dark header-button" (click)="LoginPage()">Sign In</button>
+  </div>
+  <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger" [src]="expandedList ? cross : hamburger_menu"
+       [@imageChange]="imageChangeTrigger ? 'true' : 'false'" [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+
+</mat-toolbar>
+
+<div *ngIf="expandedList==true" class="vertical-list">
+  <button type="button" class="btn btn-dark expandedButton" (click)="HomePage()">Home</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="ContactUs()">Contact</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="LoginPage()">Sign In</button>
+</div>
+
+<div class="px-4 py-3 my-5 text-center faq-section alt-bg">
+  <h1 class="display-5 fw-bold text-body-emphasis faq-section-header">FAQ's</h1>
+  <br />
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: How does Furscan work?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      Furscan uses advanced AI technology to analyze uploaded images of your dog's skin issues. The AI provides an initial diagnosis, which is then verified by a qualified veterinarian to ensure accuracy.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 my-5 text-center">
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: What types of skin issues can Furscan identify?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      Furscan can help identify a wide range of common skin conditions in dogs, including allergies, infections, dermatitis, parasites, and more
+    </p>
+    </div>
+</div>
+
+<div class="px-4 py-3 my-5 text-center faq-section alt-bg">
+  <br />
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: Is Furscan a substitute for visiting a physical vet?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      Furscan is a complementary tool, designed to provide initial insights. However, it's important to consult with a local veterinarian for comprehensive care and treatment options.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-2 my-4 text-center">
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: How do I upload images of my dog's skin issue?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      You can easily upload images through our user-friendly interface. Simply follow the prompts on the website to attach clear and well-lit photos of the affected area.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-3 my-5 text-center faq-section alt-bg">
+  <br />
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: How long does it take to receive a diagnosis report?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      The initial AI analysis is typically completed within minutes. After that, our team of veterinarians will review and verify the report, aiming to provide you with a final assessment as soon as possible.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-2 my-4 text-center">
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: Is Furscan's AI technology reliable?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      Yes, our AI is trained on a vast dataset of canine skin images and is continuously updated with the latest information to ensure accurate diagnoses.
+    </p>
+  </div>
+</div>
+
+<div class="px-4 py-3 my-5 text-center faq-section alt-bg border-bottom">
+  <br />
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4 faq-section-description">
+      Q: Is my uploaded data secure and private?
+    </p>
+
+    <p class="lead mb-4 faq-section-description-answer">
+      Yes, we take data security seriously. All information you provide is treated with strict confidentiality and is only accessible to authorized personnel for the purpose of diagnosis.
+    </p>
+  </div>
+</div>
+
+<div class="full-width-container-footer">
+  <footer class="py-3 my-4 footer">
+    <p class="text-center text-muted footer-copyright">© 2023 Copyright FurScan. All rights reserved.</p>
+  </footer>
+</div>
+

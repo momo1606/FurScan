@@ -1,0 +1,60 @@
+<mat-toolbar class="header">
+  <img class="header-project-logo" [src]='projectLogo' alt="">
+  <span class="header-project-heading">FurScan</span>
+  <span class="example-spacer"></span>
+  <div *ngIf='hamburger==false'>
+    <button type="button" class="btn header-button" (click)="Home()">Home</button>
+    <button type="button" class="btn header-button" (click)="AboutUs()">About Us</button>
+    <button type="button" class="btn btn-dark header-button" (click)="LoginPage()">Sign In</button>
+  </div>
+  <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger" [src]="expandedList ? cross : hamburger_menu"
+       [@imageChange]="imageChangeTrigger ? 'true' : 'false'" [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+</mat-toolbar>
+<div *ngIf="expandedList==true" class="vertical-list">
+  <button type="button" class="btn btn-dark expandedButton" (click)="Home()">Home</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="AboutUs()">About Us</button>
+  <button type="button" class="btn btn-dark expandedButton" (click)="LoginPage()">Sign In</button>
+</div>
+
+<div class="row border-bottom">
+  <div class="px-5 py-5 my-5 text-center heroSection">
+    <h1 class="display-5 fw-bold text-body-emphasis hero-section-header">Contact Us</h1>
+  </div>
+  <div class="row mt-4 text-center">
+    <div class="col-md-6">
+      <h2 class="contact-section-header">Contact Information</h2>
+      <p><b>Email:</b> info@furscan.com</p>
+      <p><b>Phone:</b> +1-123-456-7890</p>
+      <p><b>Address:</b> 123 Main Street, Halifax</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="contact-section-header">Business Hours</h2>
+      <p><b>Monday - Friday:</b> 8:00 AM - 8:00 PM</p>
+      <p><b>Saturday - Sunday:</b> 9:00 AM - 5:00 PM</p>
+    </div>
+  </div>
+
+  <div class="row mt-4 text-center">
+    <div class="col-md-6">
+      <h2 class="contact-section-header info">Social Media</h2>
+      <p><b>Follow us on:</b></p>
+      <ul class="list-unstyled">
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>LinkedIn</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2 class="contact-section-header info">FAQs</h2>
+      <p><b>Have a question?</b></p>
+      <p>Check out our <a style="color: black;" href="/faqs">FAQs</a> for answers.</p>
+    </div>
+  </div>
+</div>
+
+<div class="full-width-container-footer">
+  <footer class="py-3 my-4 footer">
+    <p class="text-center text-muted footer-copyright">© 2023 Copyright FurScan. All rights reserved.</p>
+  </footer>
+</div>
+

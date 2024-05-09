@@ -1,0 +1,133 @@
+stages:
+  - setup
+  - build
+  - test
+  # - code_quality
+  - code_quality_designite
+  - deploy
+
+
+variables:
+  S3_BUCKET: "elasticbeanstalk-us-east-1-705544929821"
+  APPLICATION_NAME: "FurScan"
+  ENVIRONMENT_NAME: "FurScan-env"
+  JAR_FILE_NAME: "furscan-${CI_COMMIT_SHORT_SHA}.jar"
+
+
+setup:
+  stage: setup
+  tags:
+    - spring
+  script:
+    - sudo apt-get update -y && sudo apt install -y openjdk-17-jdk   
+    - echo "JDK installed"
+    - cd /tmp
+    - rm -f apache-maven-3.9.5-bin.tar.gz
+    - wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+    - tar -xvf apache-maven-3.9.5-bin.tar.gz
+    - sudo rm -rf /opt/apache-maven-3.9.5
+    - sudo mv apache-maven-3.9.5 /opt/
+    - M2_HOME='/opt/apache-maven-3.9.5'
+    - PATH="$M2_HOME/bin:$PATH"
+    - export PATH
+    - mvn -version
+    - echo "Maven installed"
+    - sudo apt install -y python3-pip                  
+    - echo "Python3 installed"
+    - sudo pip3 install awscli                         
+    - echo "AWS CLI installed"
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - echo $AWS_DEFAULT_REGION
+    - sudo aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - sudo aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - sudo aws configure set region $AWS_DEFAULT_REGION
+    - echo "AWS config done"
+
+build:
+  needs:
+    - setup
+  stage: build
+  tags:
+    - spring
+  script:
+    - cd furscan_spring_boot_api/furscan
+    - M2_HOME='/opt/apache-maven-3.9.5'
+    - PATH="$M2_HOME/bin:$PATH"
+    - export PATH
+    - mvn clean package
+    - pwd
+    - mv target/furscan-0.0.1-SNAPSHOT.jar target/${JAR_FILE_NAME}
+  artifacts:
+    paths:
+      - furscan_spring_boot_api/furscan/target/${JAR_FILE_NAME}  
+
+test:
+  needs:
+    - setup
+  stage: test
+  tags:
+    - spring
+  script:
+    - cd furscan_spring_boot_api/furscan
+    - M2_HOME='/opt/apache-maven-3.9.5'
+    - PATH="$M2_HOME/bin:$PATH"
+    - export PATH
+    - mvn test
+
+
+# code_quality:
+#   needs:
+#     - setup
+#     - build
+#   tags:
+#     - spring
+#   stage: code_quality
+#   script:
+#     - cd furscan_spring_boot_api/furscan
+#     - M2_HOME='/opt/apache-maven-3.9.5'
+#     - PATH="$M2_HOME/bin:$PATH"
+#     - export PATH
+#     - mvn clean verify sonar:sonar -Dsonar.projectName='Furscan' -Dsonar.host.url=http://172.17.1.90:9000 -Dsonar.login=admin -Dsonar.password=root -Dsonar.verbose=true
+
+
+code_quality_designite:
+  needs:
+    - setup
+    - build
+    - test
+  tags:
+    - spring
+  stage: code_quality_designite
+  script:
+    - cd /home/student/designite
+    - sudo rm -f code_quality.zip
+    - sudo java -jar DesigniteJava.jar -i /home/gitlab-runner/builds/8aQ6ax8N6/0/courses/2023-fall/csci-5308/Group06/furscan_spring_boot_api/furscan/src -o /home/student/designite/output/ | sudo tee /home/student/designite/smells_summary.txt
+    - sudo cat smells_summary.txt
+    - sudo mv smells_summary.txt output/
+    - sudo zip -r code_quality.zip output
+    - sudo mv code_quality.zip /home/gitlab-runner/builds/8aQ6ax8N6/0/courses/2023-fall/csci-5308/Group06/furscan_spring_boot_api/furscan
+    - echo "THE SUMMARY OF ALL THE SMELLS IS IN smells_summary.txt"
+    - echo "code_quality.zip SAVED IN ARTIFACTS"
+  artifacts:
+    paths:
+      - furscan_spring_boot_api/furscan/code_quality.zip
+    # untracked: false
+    # when: on_success
+    # expire_in: 30 days
+
+
+deploy:
+  stage: deploy
+  needs:
+    - setup
+    - build
+    - test
+  tags:
+    - spring
+  script:
+    - aws s3 cp furscan_spring_boot_api/furscan/target/${JAR_FILE_NAME} s3://$S3_BUCKET/${JAR_FILE_NAME}  
+    - aws elasticbeanstalk create-application-version --application-name $APPLICATION_NAME --version-label $CI_COMMIT_SHORT_SHA --source-bundle S3Bucket="$S3_BUCKET",S3Key="${JAR_FILE_NAME}"
+    - aws elasticbeanstalk update-environment --application-name $APPLICATION_NAME --environment-name $ENVIRONMENT_NAME --version-label $CI_COMMIT_SHORT_SHA
+    - echo "deployment done"
+    

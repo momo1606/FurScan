@@ -1,0 +1,9 @@
+boto3==1.28.63
+fastapi==0.104.0
+numpy==1.26.1
+opencv_python==4.8.1.78
+Pillow==10.1.0
+PyMySQL==1.1.0
+reportlab==4.0.6
+tensorflow==2.14.0
+tensorflow_macos==2.14.0

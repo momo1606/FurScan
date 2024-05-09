@@ -1,0 +1,183 @@
+<mat-toolbar class="header">
+    <img class="header-project-logo" [src]='projectLogo' alt="" routerLink = ''>
+    <span class="header-project-heading">FurScan</span>
+
+    <span class="example-spacer"></span>
+
+
+
+</mat-toolbar>
+
+
+
+<section class="h-100 h-custom ">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <form [formGroup]="signUpForm">
+                                <div>
+                                    <div class="p-5">
+                                        <h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation</h3>
+
+                                        <div class="mb-4 pb-2">
+                                            <select class="select" formControlName="title">
+                                                <option disabled selected value="">Select Title</option>
+                                                <option value="1">Mr.</option>
+                                                <option value="2">Ms.</option>
+                                                <option value="3">Mrs.</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="text" id="form3Examplev2"
+                                                        class="form-control form-control-lg"
+                                                        formControlName="first_name" />
+                                                    <label class="form-label" for="form3Examplev2">First name</label>
+                                                    <!-- Display error message in red if email is invalid -->
+                                                    <div *ngIf="signUpForm.get('first_name')?.invalid && (signUpForm.get('first_name')?.dirty || signUpForm.get('first_name')?.touched)"
+                                                        class="text-danger">
+                                                        Kindly add First Name
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="text" id="form3Examplev3"
+                                                        class="form-control form-control-lg"
+                                                        formControlName="last_name" />
+                                                    <label class="form-label" for="form3Examplev3">Last name</label>
+                                                    <div *ngIf="signUpForm.get('last_name')?.invalid && (signUpForm.get('last_name')?.dirty || signUpForm.get('last_name')?.touched)"
+                                                        class="text-danger">
+                                                        Kindly add Last Name
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4 pb-2">
+                                            <select class="select" formControlName="is_doctor">
+                                                <option disabled selected value="">Type Of User</option>
+                                                <option value="0">Dog Owner</option>
+                                                <option value="1">Doctor</option>
+                                            </select>
+                                            <div *ngIf="signUpForm.get('is_doctor')?.invalid && (signUpForm.get('is_doctor')?.dirty || signUpForm.get('is_doctor')?.touched)"
+                                                class="text-danger">
+                                                Kindly select the type of User
+                                            </div>
+                                        </div>
+
+
+                                        <div>
+                                            <div>
+                                                <h3>Upload Profile Image</h3>
+                                            </div>
+                                            <div class="col-md-9 pe-5">
+                                                <input class="form-control form-control-lg" id="formFileLg" type="file"
+                                                    (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png" />
+                                                <div style="font-weight: 550;" class="text-danger">Profile Image Upload is optional. Max file
+                                                    size 50 Kb. Kindly upload only .jpg images</div>
+                                            </div>
+                                            <div class="small text-danger mt-2" *ngIf="fileSizeError">File size exceeds 50 kb limit</div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class=" bg-black text-white">
+                                    <div class="p-5">
+                                        <h3 class="fw-normal mb-5">Contact Details</h3>
+
+                                        <div class="row">
+                                            <div class="col-md-5 mb-4 pb-2">
+
+                                                <div class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea7"
+                                                        class="form-control form-control-lg"
+                                                        formControlName="country_code" />
+                                                    <label class="form-label" for="form3Example7">Code +</label>
+                                                    <div *ngIf="signUpForm.get('country_code')?.invalid && (signUpForm.get('country_code')?.dirty || signUpForm.get('country_code')?.touched)"
+                                                        class="text-danger">
+                                                        Kindly add country code
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-7 mb-4 pb-2">
+
+                                                <div class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea8"
+                                                        class="form-control form-control-lg"
+                                                        formControlName="phone_no" />
+                                                    <label class="form-label" for="form3Example8">Phone Number</label>
+                                                    <div *ngIf="signUpForm.get('phone_no')?.invalid && (signUpForm.get('phone_no')?.dirty || signUpForm.get('phone_no')?.touched)"
+                                                        class="text-danger">
+                                                        Kindly add phone number
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <div class="form-outline form-white">
+                                                <input type="email" id="form3Examplea9"
+                                                    class="form-control form-control-lg" formControlName="email" />
+                                                <label class="form-label" for="form3Examplea9">Your Email</label>
+                                                <div *ngIf="signUpForm.get('email')?.invalid && (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)"
+                                                    class="text-danger">
+                                                    Kindly add your email
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <div class="form-outline form-white">
+                                                <input type="password" id="form3ExamplePassword"
+                                                    class="form-control form-control-lg" formControlName="password" />
+                                                <label class="form-label" for="form3ExamplePassword">Password</label>
+                                                <div *ngIf="signUpForm.get('password')?.invalid && (signUpForm.get('password')?.dirty || signUpForm.get('password')?.touched)"
+                                                    class="text-danger">
+                                                    Kindly add your password. It should be atleast 8 characters. It should be alphaNumeric with atlease 1 number and 1 alphabet. No special characters are accepted.
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                                            <input class="form-check-input me-3" type="checkbox" value=""
+                                                id="form2Example3c" formControlName="is_active" />
+                                            <label class="form-check-label text-white" for="form2Example3">
+                                                I do accept the <a href="#!" class="text-white"><u>Terms and
+                                                        Conditions</u></a> of your
+                                                site.
+                                            </label>
+                                            <div *ngIf="signUpForm.get('is_active')?.invalid && (signUpForm.get('is_active')?.dirty || signUpForm.get('is_active')?.touched)"
+                                                class="text-danger">
+                                                Kindly check this box to proceed
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-light btn-lg" data-mdb-ripple-color="dark"
+                                            (click)="onSubmit()" [disabled]="signUpForm.invalid || fileSizeError">Register</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

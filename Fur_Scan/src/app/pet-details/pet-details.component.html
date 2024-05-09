@@ -1,0 +1,86 @@
+<mat-toolbar class="header">
+    <img class="header-project-logo" [src]='projectLogo' alt="">
+    <span class="header-project-heading">FurScan</span>
+
+    <span class="example-spacer"></span>
+
+
+
+</mat-toolbar>
+
+<section class="h-100 h-custom ">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <form [formGroup]="petForm">
+                                <div>
+                                    <div class="p-5">
+                                        <h3 class="fw-normal mb-5" style="color: #4835d4;">Enter Pet Information</h3>
+
+                                        <div class="mb-4 pb-2">
+
+                                            <div class="form-outline">
+                                                <input type="text" id="form3Examplev2"
+                                                    class="form-control form-control-lg" formControlName="pet_name" />
+                                                <label class="form-label" for="form3Examplev2">Pet Name</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class=" mb-4 pb-2">
+
+                                            <div class="form-outline">
+                                                <input type="text" id="form3Examplev2"
+                                                    class="form-control form-control-lg" formControlName="age" />
+                                                <label class="form-label" for="form3Examplev2">Enter Age</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class=" mb-4 pb-2">
+
+                                            <div class="form-outline">
+                                                <input type="text" id="form3Examplev2"
+                                                    class="form-control form-control-lg" formControlName="breed" />
+                                                <label class="form-label" for="form3Examplev2">Enter Breed</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <h3>Upload Disease Image</h3>
+                                            </div>
+                                            <div class="pe-5">
+                                                <select class="form-select form-select-lg" id="imageSource" (change)="onImageSourceSelected($event)">
+                                                    <option value="local">Upload from Device</option>
+                                                    <option value="cloud">Select from Cloud</option>
+                                                </select>
+                                                <div *ngIf="imageSource === 'local'">
+                                                    <input class="form-control form-control-lg" id="formFileLg" type="file"
+                                                        (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png" />
+                                                    <div class="text-danger mt-2">Max file size 600 kB. Kindly add only .jpg images</div>
+                                                </div>
+                                                <div *ngIf="imageSource === 'cloud'">
+                                                    <input class="form-control form-control-lg" (input)="onFileSelected($event)" id="cloudImageUrl" type="url" placeholder="Enter Cloud Image URL" />
+                                                    <div class="text-danger mt-2">THIS FEATURE WILL ONLY WORK IF THE PROJECT IS SET UP AND RUN LOCALLY AND CHROME SECURITY IS DISABLED. KINDLY READ DOCUMENTATION FOR THIS. Only google drive shareable links can be provided. Max file size 600 kB. Kindly add only .jpg images</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <button type="button" class="btn btn-dark btn-lg" data-mdb-ripple-color="dark"
+                            (click)="onSubmit()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

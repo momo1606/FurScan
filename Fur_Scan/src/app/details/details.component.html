@@ -1,0 +1,172 @@
+<div class="container">
+    <mat-toolbar class="header" style="display: flex;">
+        <img class="header-project-logo" [src]='projectLogo' alt="" routerLink=''>
+        <span class="header-project-heading" style=" margin-top: 2%;">FurScan</span>
+        <span class="example-spacer"></span>
+        <div *ngIf='hamburger==false' style="display: flex; margin-top: 2%; height: 10%;">
+            <button type="button" class="btn header-button" (click)="backToAccount()">Dashboard</button>
+            <button type="button" class="btn btn-dark header-button" (click)="logout()">Logout</button>
+        </div>
+        <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger"
+            [src]="expandedList ? cross : hamburger_menu" [@imageChange]="imageChangeTrigger ? 'true' : 'false'"
+            [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+    </mat-toolbar>
+    <div *ngIf="expandedList==true" class="vertical-list">
+        <button type="button" class="btn btn-dark expandedButton" (click)="backToAccount()">Dashboard</button>
+        <button type="button" class="btn btn-dark expandedButton" (click)="logout()">Logout</button>
+    </div>
+
+    <!-- <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card" style="border: 2px solid #000; background-color: #e2e5ee;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold; font-size: 1.25rem;">Pet Details</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item" style="border: 1px solid #000;">Pet ID: {{ petData.pet_report_id }}</li>
+                            <li class="list-group-item" style="border: 1px solid #000;">Pet Name: {{ petData.pet_name }}</li>
+                            <li class="list-group-item" style="border: 1px solid #000;">Pet Age: {{ petData.age }}</li>
+                            <li class="list-group-item" style="border: 1px solid #000;">Pet Breed: {{ petData.breed }}</li>
+                            <li class="list-group-item" style="border: 1px solid #000;">
+                                Pet Image:
+                                <img src="{{ petData.image_text }}" alt="Pet Image" class="img-fluid">
+                            </li>
+                            <li class="list-group-item" style="border: 1px solid #000;">Remarks: {{ petData.remarks || 'N/A' }}</li>
+                            <li class="list-group-item" style="border: 1px solid #000;">
+                                <a *ngIf="petData.report_text !== null" [href]="petData.report_text"
+                                    [download]="'pet_report_' + petData.pet_report_id + '.pdf'">
+                                    <button class="btn btn-primary btn-sm">Download Report</button>
+                                </a>
+                                <span *ngIf="petData.report_text === null" style="color: red;">No Report Available</span>
+                            </li>
+                            <li class="list-group-item" style="border: 1px solid #000;">
+                                <button class="btn btn-primary btn-sm"
+                                    [disabled]="petData.is_Send !== null" (click)="onCheckboxChange(petData)"
+                                    style="background-color: #4CAF50; border: 1px solid #000;">
+                                    {{ petData.is_Send !== null ? 'Dog Report already sent' : 'Send to Doc' }}
+                                </button>
+
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <section style="background-color: #c1c1c1;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div style="width: 95%;" class="col col-lg-6 mb-4 mb-lg-0">
+                    <div class="card mb-3" style="border-radius: .5rem; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 2);">
+                        <div class="row g-0">
+                            <div class="col-md-4 text-center py-4"
+                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background-color: #27282b; color: #fff;">
+
+                                <div class="overflow-hidden mx-auto"
+                                    style="width: 120px; height: 120px; border: 5px solid #fff;">
+                                    <img src="{{ petData.image_text }}" alt="Pet Image" class="img-fluid"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <h2>Disease image</h2>
+
+                                <h3 class="mt-4 mb-2">Pet Name</h3>
+                                <p>{{ petData.pet_name }}</p>
+
+                                <h3 class="mt-3 mb-2">Pet Breed</h3>
+                                <p>{{ petData.breed }}</p>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <h2>Information</h2>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h4>Remarks</h4>
+                                            <p class="text-muted">{{ petData.remarks || 'N/A' }}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h4>Age</h4>
+                                            <p class="text-muted">{{ petData.age }}</p>
+                                        </div>
+                                    </div>
+                                    <h2>Download Links</h2>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h4>Download Report</h4>
+                                            <a *ngIf="petData.report_text !== null" [href]="petData.report_text"
+                                                [download]="'pet_report_' + petData.pet_report_id + '.pdf'">
+                                                <button class="btn btn-dark btn-sm">Download</button>
+                                                <span *ngIf="petData.report_text === null" style="color: red;">No Report
+                                                    Available</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h4>Send to Doc Toggle</h4>
+                                            <!-- <p class="text-muted">Dolor sit amet</p> -->
+                                            <!-- <button class="btn btn-primary btn-sm" [disabled]="petData.is_Send !== null"
+                                                (click)="onCheckboxChange(petData)"
+                                                style="background-color: #4CAF50; border: 1px solid #000;">
+                                                {{ petData.is_Send !== null ? 'Dog Report already sent' : 'Send to Doc'
+                                                }}
+                                            </button> -->
+
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="flexSwitchCheckDefault" [disabled]="petData.is_Send !== null"
+                                                    (click)="onCheckboxChange(petData)">
+                                                <label class="form-check-label" for="flexSwitchCheckDefault"> {{
+                                                    petData.is_Send !== null ? 'Dog Report already sent' : 'Send to Doc'
+                                                    }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="mt-4 p-3 border rounded" style="display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* width: 95%; */
+            background-color: white;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 2);">
+                <h4 class="mb-3">Pet Health Information</h4>
+                <div>
+                    <strong>Disease:</strong> {{ petData.disease }}
+                </div>
+                <div class="mt-3">
+                    <strong>Additional Information:</strong>
+                    <p class="text-muted">{{ getDiseaseMessage(petData.disease) }}</p>
+                </div>
+            </div> -->
+
+            <div class="mt-4 p-3 border rounded diseaseInfo">
+
+                <h4 class="mb-3 font-weight-bold">Pet Health Information</h4>
+
+                <div>
+                    <strong>Disease:</strong> {{ petData.disease }}
+                </div>
+
+                <div class="mt-3">
+                    <strong>Additional Information:</strong>
+                    <p class="text-muted" [innerHTML]="getDiseaseMessage(petData.disease)"></p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+</div>
+
+<div class="footer">
+    <p>Copyright © 2023 FurScan. All rights reserved.</p>
+</div>

@@ -1,0 +1,84 @@
+<mat-toolbar class="header">
+    <img class="header-project-logo" [src]='projectLogo' alt="" routerLink=''>
+    <span class="header-project-heading">FurScan</span>
+    <span class="example-spacer"></span>
+    <div *ngIf='hamburger==false'>
+        <button type="button" class="btn header-button" (click)="backToAccount()">Dashboard</button>
+        <button type="button" class="btn btn-dark header-button" (click)="logout()">Logout</button>
+    </div>
+    <img (click)="toggleMenu()" *ngIf="hamburger" class="header-hamburger" [src]="expandedList ? cross : hamburger_menu"
+        [@imageChange]="imageChangeTrigger ? 'true' : 'false'" [@rotate]="rotateTrigger ? 'true' : 'false'" alt="">
+</mat-toolbar>
+<div *ngIf="expandedList==true" class="vertical-list">
+    <button type="button" class="btn btn-dark expandedButton" (click)="backToAccount()">Dashboard</button>
+    <button type="button" class="btn btn-dark expandedButton" (click)="logout()">Logout</button>
+</div>
+
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Use ngIf to conditionally render image or text -->
+                    <ng-container *ngIf="userProfileImage; else noImage">
+                        <img class="card-body" [src]="userProfileImage" alt="">
+                    </ng-container>
+                    <ng-template #noImage>
+                        <p>{{ imageAltText }}</p>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form [formGroup]="accountForm">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <h2 *ngIf="!editFirstName">{{ userFirstname }}</h2>
+                                <input *ngIf="editFirstName" class="form-control" id="inputFirstName" type="text"
+                                    formControlName="editedFirstName" placeholder="Enter first name">
+                                <button *ngIf="!editFirstName" class="btn btn-link"
+                                    (click)="editField('first_name')">Edit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <h2 *ngIf="!editLastName">{{ userLastname }}</h2>
+                                <input *ngIf="editLastName" class="form-control" id="inputLastName" type="text"
+                                    formControlName="editedLastName" placeholder="Enter last name">
+                                <button *ngIf="!editLastName" class="btn btn-link"
+                                    (click)="editField('last_name')">Edit</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <h2 *ngIf="!editEmail">{{ userEmail }}</h2>
+                            <input *ngIf="editEmail" class="form-control" id="inputEmailAddress" type="text"
+                                formControlName="editedEmail" placeholder="Enter email address">
+                            <button *ngIf="!editEmail" class="btn btn-link" (click)="editField('email')">Edit</button>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <h2 *ngIf="!editPhoneNo">{{ userPhoneNo }}</h2>
+                                <input *ngIf="editPhoneNo" class="form-control" id="inputPhone" type="text"
+                                    formControlName="editedPhoneNo" placeholder="Enter phone number">
+                                <button *ngIf="!editPhoneNo" class="btn btn-link"
+                                    (click)="editField('phone_no')">Edit</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" [disabled]="!isSubmitEnabled" (click)="submitChanges()">Submit
+                            Changes</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

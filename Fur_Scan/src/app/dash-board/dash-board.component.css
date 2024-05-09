@@ -1,0 +1,190 @@
+.header {
+    padding: 0% 5% 0% 0%;
+    background-color: #c1c1c1;
+    top: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.header-project-logo {
+    width: 7%;
+    border-radius: 50%;
+    margin: 1%;
+}
+
+.header-project-heading {
+    box-sizing: border-box;
+    /* font-family: fantasy; */
+    font-size: 50px;
+    color: #8f2726;
+}
+
+.header-button {
+    width: 50%;
+    margin-left: 2%;
+    font-weight: 550;
+}
+
+.header-hamburger {
+    width: 7%;
+}
+
+.vertical-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2%;
+
+}
+
+/* Style each button individually if needed */
+.vertical-list button {
+    margin-bottom: 5px;
+    /* Add spacing between the buttons */
+}
+
+.expandedButton {
+    width: 96%;
+    margin-left: 2%
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .header-project-heading {
+        font-size: 40px;
+        /* Adjust the font size for smaller screens */
+    }
+}
+
+/* Media Query for even smaller screens */
+@media (max-width: 480px) {
+    .header-project-heading {
+        font-size: 30px;
+        /* Adjust the font size for even smaller screens */
+    }
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+.userInfo{
+    background: #8c98a3; 
+    margin: 0% !important;
+    display: flex;
+    padding: 6%;
+}
+
+.welcomeMessage{
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+.upload-button{
+    width: 30%;
+    margin-left: 2%;
+    font-weight: 550;
+}
+
+.search-tab {
+        margin: 0 auto;
+        margin: 0% !important;
+        padding: 6%;
+        height: 68vh;
+}
+
+.search-input {
+    width: 97%; /* Adjust input width as needed */
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-button {
+    width: 30%; /* Adjust button width as needed */
+    border-radius: 0 5px 5px 0;
+}
+
+/* .footer {
+    background-color: black;
+    color: white;
+    padding: 4%;
+    height: 9vh;
+    margin-top: auto;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0%;
+} */
+
+.data-table {
+    width: 97%; /* Adjust the width as needed */
+    margin: 5% 0%; /* Center the table and add margin */
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #e2e5ee;
+    border: 1px solid white; /* Set border color to white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-heading {
+    background-color: black;
+    color: white;
+}
+
+.table-container {
+    max-height: 50vh;
+    overflow-y: scroll;;
+}
+
+.pagination-controls {
+    margin-top: 2%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.footer {
+    background-color: black;
+    color: white;
+    padding: 2%;
+    text-align: center;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid black; /* Set border color to white */
+    
+}
+
+.scrollable-tbody{
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.not-reviewed {
+    color: red; 
+    font-weight: 550;/* Text color for "Not reviewed" */ /* Make the text bold for emphasis */
+    text-decoration: underline; /* Add underline to make it stand out */
+}
+
+.reviewed {
+    color: #11720c;
+    font-weight: 550;
+    font-style: italic;
+}
